@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atharv Motghare</title>
+<meta name="description" content="Atharv Motghare. Software engineer, co-founder and CTO of GetYourFit. B.Tech Software Engineering at DTU.">
+<style>
+  :root { --bg:#fff; --text:#1a1a1a; --muted:#666; --link:#1a5fb4; --rule:#e4e4e4; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#16181b; --text:#e6e6e6; --muted:#9a9a9a; --link:#7ab0ff; --rule:#2c2f34; }
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0 auto; max-width: 680px; padding: 56px 20px 80px;
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text); background: var(--bg);
+  }
+  header { display: flex; gap: 24px; align-items: center; }
+  header img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex: none; background: var(--rule); }
+  h1 { font-size: 2rem; margin: 0 0 4px; font-weight: 600; letter-spacing: -0.01em; }
+  .tagline { margin: 0; color: var(--muted); }
+  h2 { font-size: 1.15rem; margin: 40px 0 10px; font-weight: 600; }
+  p { margin: 0 0 14px; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .links { margin: 20px 0 8px; }
+  .links a { margin-right: 14px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  li:last-child { border-bottom: 0; }
+  .title { font-weight: 600; }
+  .when { color: var(--muted); font-size: 0.9rem; }
+  .stack { color: var(--muted); font-size: 0.9rem; }
+  .desc { display: block; margin-top: 2px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 0.85rem; }
+  @media (max-width: 520px) { header { flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="photo.jpg" alt="Atharv Motghare">
+  <div>
+    <h1>Atharv Motghare</h1>
+    <p class="tagline">Software engineer. Co-founder and CTO at GetYourFit.</p>
+  </div>
+</header>
+
+<div class="links">
+  <a href="mailto:atharvmotghare07@gmail.com">Email</a>
+  <a href="https://github.com/atharvmotghare">GitHub</a>
+  <a href="https://linkedin.com/in/atharvmotghare">LinkedIn</a>
+  <a href="resume.pdf">Resume</a>
+</div>
+
+<h2>About</h2>
+<p>
+  I'm a final-year B.Tech student in Software Engineering at Delhi Technological University
+  in New Delhi. I'm co-founder and CTO of GetYourFit, where I own the backend of an AI fashion
+  recommendation product. I mostly work on backends, databases and data pipelines, and I like
+  shipping things that real people use.
+</p>
+<p>
+  I'm open to full-time roles in backend, data engineering and AI applications.
+</p>
+
+<h2>Projects</h2>
+<ul>
+  <li>
+    <span class="title"><a href="https://neuralfeed.vercel.app">NeuralFeed</a></span>
+    <span class="when">live, used daily</span>
+    <span class="desc">
+      An AI news aggregator. It pulls articles from 68 feeds (arXiv, Reddit, Hacker News,
+      GitHub, YouTube, RSS) into one PostgreSQL database, removes duplicates across sources,
+      and stores LLM-written summaries with a fallback if the model call fails. 235 Pytest tests
+      run on every push through GitHub Actions.
+    </span>
+    <span class="stack">Python, FastAPI, PostgreSQL, Next.js, TypeScript, Docker. API on Render, database on Neon, frontend on Vercel.</span>
+  </li>
+</ul>
+
+<h2>Experience</h2>
+<ul>
+  <li>
+    <span class="title">GetYourFit Services Pvt. Ltd.</span>
+    <span class="when">Co-founder &amp; CTO, Aug 2025 &ndash; present</span>
+    <span class="desc">
+      Build the backend: services, APIs, authentication and catalog data intake. Write the API
+      docs so frontend and ML teammates can work without back-and-forth, and plan sprints
+      across the team. Pitched at national competitions and startup festivals, winning
+      INR 1.5 lakh in grants and a top-40 national finish at IIT Madras E-Summit 2026.
+    </span>
+  </li>
+  <li>
+    <span class="title">Bop Consultancy and Services</span>
+    <span class="when">Backend Engineer Intern, Dec 2025 &ndash; Mar 2026</span>
+    <span class="desc">
+      Built Go APIs (Echo, GORM, MySQL) for a client's inventory, order and warehouse app,
+      including stock tracking. Designed the tables for products, orders, order items and
+      invoices, and added JWT login with role-based access for warehouse and admin users.
+    </span>
+  </li>
+  <li>
+    <span class="title">thob 3D Studios</span>
+    <span class="when">Business Growth Executive Intern, Dec 2025 &ndash; Mar 2026</span>
+    <span class="desc">
+      Built a target-company list with LinkedIn Sales Navigator and Apollo.io, tracked it in a
+      CRM, and researched the market and competitors to decide who to approach first.
+    </span>
+  </li>
+</ul>
+
+<h2>Education</h2>
+<ul>
+  <li>
+    <span class="title">Delhi Technological University</span>
+    <span class="when">B.Tech, Software Engineering, 2023 &ndash; 2027</span>
+  </li>
+</ul>
+
+<h2>Achievements</h2>
+<ul>
+  <li>National Finalist, IIT Madras E-Summit 2026 (top 40 teams nationally)</li>
+  <li>National Finalist, NSUT Industrial Ideathon 2025</li>
+  <li>Startup grants: INR 1 lakh (Delhi Government Yuva Startup Festival 2026) and INR 50,000 (DTU Innovation and Incubation Foundation)</li>
+  <li>Teamwork Excellence Award, Enactova 2025 (top 5 of 1,600+ participants)</li>
+</ul>
+
+<h2>Skills</h2>
+<p>
+  <span class="title">Backend:</span> Python, Go, FastAPI, REST APIs, JWT auth, role-based access, background jobs.<br>
+  <span class="title">Data:</span> SQL, PostgreSQL, MySQL, schema design, ingestion pipelines, deduplication.<br>
+  <span class="title">Frontend:</span> Next.js, TypeScript.<br>
+  <span class="title">Tools:</span> Pytest, GitHub Actions, Git, Docker, Render, Vercel, Neon.
+</p>
+
+<footer>Last updated November 2026.</footer>
+
+</body>
+</html>
