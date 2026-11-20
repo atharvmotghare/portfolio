@@ -4,140 +4,235 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Atharv Motghare</title>
-<meta name="description" content="Atharv Motghare. Software engineer, co-founder and CTO of GetYourFit. B.Tech Software Engineering at DTU.">
+<meta name="description" content="Atharv Motghare. Builds data pipelines, AI features and backends. Co-founder and CTO of GetYourFit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#fff; --text:#1a1a1a; --muted:#666; --link:#1a5fb4; --rule:#e4e4e4; }
+  :root { --bg:#f5f6f8; --ink:#0c0e13; --mute:#5d6470; --rule:#dde0e6; --acc:#2540ff; --panel:#fff; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#16181b; --text:#e6e6e6; --muted:#9a9a9a; --link:#7ab0ff; --rule:#2c2f34; }
+    :root { --bg:#0b0d12; --ink:#eceef3; --mute:#8d95a5; --rule:#222733; --acc:#7b8fff; --panel:#11141b; }
   }
-  * { box-sizing: border-box; }
-  html { background: var(--bg); }
-  body {
-    margin: 0 auto; max-width: 680px; padding: 56px 20px 80px;
-    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text); background: var(--bg);
+  * { box-sizing:border-box; }
+  html { background:var(--bg); scroll-behavior:smooth; }
+  body { margin:0; color:var(--ink); font:16px/1.6 "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:underline; text-decoration-color:var(--rule); text-underline-offset:4px; transition:text-decoration-color .2s; }
+  a:hover { text-decoration-color:var(--acc); }
+  :focus-visible { outline:2px solid var(--acc); outline-offset:3px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .serif { font-family:"Instrument Serif", Georgia, "Times New Roman", serif; font-weight:400; }
+  /* top bar */
+  .bar { display:flex; justify-content:space-between; align-items:center; padding:22px 0; position:relative; z-index:2; gap:16px; flex-wrap:wrap; }
+  .who { display:flex; align-items:center; gap:12px; font-size:.95rem; }
+  .who img { width:38px; height:38px; border-radius:50%; object-fit:cover; }
+  .who span { color:var(--mute); }
+  .nav { display:flex; gap:22px; font-size:.95rem; }
+  /* hero */
+  .hero { position:relative; min-height:78vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
+  #flow { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .hero .wrap { position:relative; z-index:1; width:100%; }
+  h1 { font-size:clamp(3.4rem, 10.5vw, 8.2rem); line-height:.94; letter-spacing:-.025em; margin:0 0 28px; }
+  .lede { max-width:34ch; font-size:clamp(1.1rem,2.2vw,1.35rem); line-height:1.45; margin:0; }
+  .cap { position:absolute; left:24px; bottom:22px; z-index:1; color:var(--mute); font-size:.85rem; max-width:34ch; }
+  /* ranker */
+  section { padding:92px 0 0; }
+  h2 { font-size:clamp(2rem,4.6vw,3.1rem); line-height:1.05; letter-spacing:-.015em; margin:0 0 12px; }
+  .sub { color:var(--mute); max-width:56ch; margin:0 0 28px; }
+  .q { width:100%; font:inherit; color:var(--ink); background:var(--panel); border:1px solid var(--rule); border-radius:10px; padding:14px 16px; resize:vertical; min-height:56px; transition:border-color .2s; }
+  .q:focus { outline:none; border-color:var(--acc); }
+  .roles { display:flex; flex-wrap:wrap; gap:8px 22px; margin:14px 0 34px; font-size:.95rem; }
+  .roles button { font:inherit; color:var(--mute); background:none; border:0; padding:2px 0; cursor:pointer; border-bottom:1.5px solid transparent; transition:color .2s,border-color .2s; }
+  .roles button:hover { color:var(--ink); }
+  .roles button[aria-pressed="true"] { color:var(--ink); border-bottom-color:var(--acc); }
+  #list { border-top:1px solid var(--rule); }
+  .row { display:grid; grid-template-columns:64px 1fr 120px; gap:8px 20px; padding:22px 0; border-bottom:1px solid var(--rule); align-items:start; will-change:transform; }
+  .num { font-size:2.4rem; line-height:1; color:var(--mute); transition:color .3s; }
+  .row.top .num { color:var(--acc); }
+  .src { color:var(--mute); font-size:.85rem; margin-bottom:2px; }
+  .t { font-weight:500; font-size:1.08rem; }
+  .d { color:var(--mute); margin:4px 0 0; max-width:62ch; }
+  .why { margin:8px 0 0; font-size:.88rem; min-height:1.3em; color:var(--acc); }
+  .fit { text-align:right; font-size:.85rem; color:var(--mute); font-variant-numeric:tabular-nums; }
+  .track { height:3px; background:var(--rule); border-radius:2px; margin-top:8px; overflow:hidden; }
+  .track i { display:block; height:100%; background:var(--acc); width:0; transition:width .6s cubic-bezier(.2,.7,.2,1); }
+  /* ledger */
+  .ledger { display:grid; grid-template-columns:200px 1fr; gap:0 28px; border-top:1px solid var(--rule); }
+  .ledger > div { padding:16px 0; border-bottom:1px solid var(--rule); }
+  .ledger .k { color:var(--mute); font-size:.92rem; }
+  .big { font-size:clamp(2rem,6vw,4.2rem); line-height:1; letter-spacing:-.02em; word-break:break-word; }
+  footer { padding:90px 0 60px; color:var(--mute); font-size:.85rem; }
+  @media (max-width:640px) {
+    .row { grid-template-columns:40px 1fr; } .fit { grid-column:2; text-align:left; max-width:200px; }
+    .num { font-size:1.8rem; } .ledger { grid-template-columns:1fr; } .ledger .k { border-bottom:0!important; padding-bottom:0!important; }
   }
-  header { display: flex; gap: 24px; align-items: center; }
-  header img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex: none; background: var(--rule); }
-  h1 { font-size: 2rem; margin: 0 0 4px; font-weight: 600; letter-spacing: -0.01em; }
-  .tagline { margin: 0; color: var(--muted); }
-  h2 { font-size: 1.15rem; margin: 40px 0 10px; font-weight: 600; }
-  p { margin: 0 0 14px; }
-  a { color: var(--link); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
-  .links { margin: 20px 0 8px; }
-  .links a { margin-right: 14px; }
-  ul { list-style: none; padding: 0; margin: 0; }
-  li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
-  li:last-child { border-bottom: 0; }
-  .title { font-weight: 600; }
-  .when { color: var(--muted); font-size: 0.9rem; }
-  .stack { color: var(--muted); font-size: 0.9rem; }
-  .desc { display: block; margin-top: 2px; }
-  footer { margin-top: 56px; color: var(--muted); font-size: 0.85rem; }
-  @media (max-width: 520px) { header { flex-direction: column; align-items: flex-start; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none!important; } html { scroll-behavior:auto; } }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="photo.jpg" alt="Atharv Motghare">
-  <div>
-    <h1>Atharv Motghare</h1>
-    <p class="tagline">Software engineer. Co-founder and CTO at GetYourFit.</p>
+<div class="hero">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="bar">
+      <div class="who"><img src="photo.jpg" alt="Atharv Motghare"><span>Open to full-time roles, class of 2027</span></div>
+      <nav class="nav" aria-label="Links">
+        <a href="mailto:atharvmotghare07@gmail.com">Email</a>
+        <a href="https://github.com/atharvmotghare">GitHub</a>
+        <a href="https://linkedin.com/in/atharvmotghare">LinkedIn</a>
+        <a href="resume.pdf">Resume</a>
+      </nav>
+    </div>
   </div>
-</header>
-
-<div class="links">
-  <a href="mailto:atharvmotghare07@gmail.com">Email</a>
-  <a href="https://github.com/atharvmotghare">GitHub</a>
-  <a href="https://linkedin.com/in/atharvmotghare">LinkedIn</a>
-  <a href="resume.pdf">Resume</a>
+  <div class="wrap" style="margin:auto 0">
+    <h1 class="serif">Atharv<br>Motghare</h1>
+    <p class="lede">I build the systems that turn a lot of messy input into one thing you can trust. Co-founder and CTO at GetYourFit.</p>
+  </div>
+  <p class="cap">68 feeds in, one feed out. That's NeuralFeed, drawn.</p>
 </div>
 
-<h2>About</h2>
-<p>
-  I'm a final-year B.Tech student in Software Engineering at Delhi Technological University
-  in New Delhi. I'm co-founder and CTO of GetYourFit, where I own the backend of an AI fashion
-  recommendation product. I mostly work on backends, databases and data pipelines, and I like
-  shipping things that real people use.
-</p>
-<p>
-  I'm open to full-time roles in backend, data engineering and AI applications.
-</p>
+<main class="wrap">
+  <section>
+    <h2 class="serif">Rank my work against a role</h2>
+    <p class="sub">Pick a role, or paste a job description. Everything below re-orders by fit and says why. It's the same idea as the recommendation work I do at GetYourFit, pointed at me.</p>
+    <textarea id="q" class="q" rows="2" aria-label="Role or job description" placeholder="Paste a job description, or type skills like: SQL, dashboards, stakeholder reporting"></textarea>
+    <div class="roles" id="roles" role="group" aria-label="Roles"></div>
+    <div id="list"></div>
+  </section>
 
-<h2>Projects</h2>
-<ul>
-  <li>
-    <span class="title"><a href="https://neuralfeed.vercel.app">NeuralFeed</a></span>
-    <span class="when">live, used daily</span>
-    <span class="desc">
-      An AI news aggregator. It pulls articles from 68 feeds (arXiv, Reddit, Hacker News,
-      GitHub, YouTube, RSS) into one PostgreSQL database, removes duplicates across sources,
-      and stores LLM-written summaries with a fallback if the model call fails. 235 Pytest tests
-      run on every push through GitHub Actions.
-    </span>
-    <span class="stack">Python, FastAPI, PostgreSQL, Next.js, TypeScript, Docker. API on Render, database on Neon, frontend on Vercel.</span>
-  </li>
-</ul>
+  <section>
+    <h2 class="serif">Background</h2>
+    <div class="ledger">
+      <div class="k">Now</div><div>Co-founder and CTO, GetYourFit Services Pvt. Ltd., since Aug 2025. B.Tech in Software Engineering, Delhi Technological University, 2023 to 2027.</div>
+      <div class="k">Before</div><div>Backend Engineer Intern at Bop Consultancy and Services, and Business Growth Executive Intern at thob 3D Studios, Dec 2025 to Mar 2026.</div>
+      <div class="k">Recognition</div><div>National Finalist, IIT Madras E-Summit 2026 (top 40 teams) and NSUT Industrial Ideathon 2025. Grants of INR 1 lakh (Delhi Government Yuva Startup Festival 2026) and INR 50,000 (DTU Innovation and Incubation Foundation). Teamwork Excellence Award, Enactova 2025, top 5 of 1,600+.</div>
+      <div class="k">Stack</div><div>Python, Go, SQL, PostgreSQL, MySQL, FastAPI, Next.js, TypeScript, Docker, Pytest, GitHub Actions, Render, Vercel, Neon.</div>
+      <div class="k">Live project</div><div><a href="https://neuralfeed.vercel.app">neuralfeed.vercel.app</a>, used daily.</div>
+    </div>
+  </section>
 
-<h2>Experience</h2>
-<ul>
-  <li>
-    <span class="title">GetYourFit Services Pvt. Ltd.</span>
-    <span class="when">Co-founder &amp; CTO, Aug 2025 &ndash; present</span>
-    <span class="desc">
-      Build the backend: services, APIs, authentication and catalog data intake. Write the API
-      docs so frontend and ML teammates can work without back-and-forth, and plan sprints
-      across the team. Pitched at national competitions and startup festivals, winning
-      INR 1.5 lakh in grants and a top-40 national finish at IIT Madras E-Summit 2026.
-    </span>
-  </li>
-  <li>
-    <span class="title">Bop Consultancy and Services</span>
-    <span class="when">Backend Engineer Intern, Dec 2025 &ndash; Mar 2026</span>
-    <span class="desc">
-      Built Go APIs (Echo, GORM, MySQL) for a client's inventory, order and warehouse app,
-      including stock tracking. Designed the tables for products, orders, order items and
-      invoices, and added JWT login with role-based access for warehouse and admin users.
-    </span>
-  </li>
-  <li>
-    <span class="title">thob 3D Studios</span>
-    <span class="when">Business Growth Executive Intern, Dec 2025 &ndash; Mar 2026</span>
-    <span class="desc">
-      Built a target-company list with LinkedIn Sales Navigator and Apollo.io, tracked it in a
-      CRM, and researched the market and competitors to decide who to approach first.
-    </span>
-  </li>
-</ul>
+  <section>
+    <h2 class="serif">Say hello</h2>
+    <a class="big serif" href="mailto:atharvmotghare07@gmail.com">atharvmotghare07<wbr>@gmail.com</a>
+  </section>
+</main>
 
-<h2>Education</h2>
-<ul>
-  <li>
-    <span class="title">Delhi Technological University</span>
-    <span class="when">B.Tech, Software Engineering, 2023 &ndash; 2027</span>
-  </li>
-</ul>
+<footer class="wrap">Everything here comes from my resume. Link to a role directly with #ai, #ml, #data, #ba or #swe.</footer>
 
-<h2>Achievements</h2>
-<ul>
-  <li>National Finalist, IIT Madras E-Summit 2026 (top 40 teams nationally)</li>
-  <li>National Finalist, NSUT Industrial Ideathon 2025</li>
-  <li>Startup grants: INR 1 lakh (Delhi Government Yuva Startup Festival 2026) and INR 50,000 (DTU Innovation and Incubation Foundation)</li>
-  <li>Teamwork Excellence Award, Enactova 2025 (top 5 of 1,600+ participants)</li>
-</ul>
+<script>
+const TAGS = {
+ ai:{l:"AI", kw:["ai","llm","llms","genai","generative","gpt","nlp","prompt","prompts","language model"]},
+ ml:{l:"ML", kw:["ml","machine learning","recommendation","recommender","ranking","model","models","personalization"]},
+ data:{l:"data", kw:["data","analytics","analyst","etl","pipeline","pipelines","ingestion","dashboard","dashboards","reporting","cleaning","warehouse"]},
+ sql:{l:"SQL", kw:["sql","postgres","postgresql","mysql","database","databases","query","queries","schema","relational"]},
+ python:{l:"Python", kw:["python","fastapi","pandas","flask","django"]},
+ backend:{l:"backend", kw:["backend","api","apis","rest","server","go","golang","microservices","authentication","auth"]},
+ swe:{l:"software engineering", kw:["software","engineer","developer","testing","tests","ci","cd","docker","deploy","deployment","devops","fullstack","full-stack"]},
+ business:{l:"business", kw:["business","stakeholder","stakeholders","client","clients","strategy","sales","marketing","crm","pitch","lead","leads","growth","consulting"]},
+ lead:{l:"team leadership", kw:["leadership","manage","management","sprint","sprints","product","roadmap","founder","startup","team"]},
+ research:{l:"research", kw:["research","analysis","market","competitor","competitors","insights"]}
+};
+const ROLES = {
+ ai:["AI engineer","AI engineer LLM python"],
+ ml:["ML engineer","ML engineer machine learning recommendation ranking python"],
+ data:["Data analyst","Data analyst SQL data analytics pipeline"],
+ ba:["Business analyst","Business analyst business stakeholder market research client"],
+ swe:["Software engineer","Software engineer backend API testing python go"]
+};
+const ITEMS = [
+ ["NeuralFeed","68 feeds, one database","Collects arXiv, Reddit, Hacker News, GitHub, YouTube and RSS into PostgreSQL. Retries when a source rate-limits and records each source's last status and errors.",{data:3,sql:2,python:2,backend:1}],
+ ["NeuralFeed","One story, stored once","Removes duplicate articles that show up on several sources.",{data:3,python:1}],
+ ["NeuralFeed","Summaries that survive a model failure","LLM summaries are saved in the database, with a fallback so the feed still works if the model call fails.",{ai:3,python:1,backend:1}],
+ ["NeuralFeed","Tested and live","235 Pytest tests run on every push through GitHub Actions. API on Render, database on Neon, frontend on Vercel. Used daily.",{swe:3,python:1,backend:1}],
+ ["GetYourFit","Outfit ranking that explains itself","A recommendation workflow that combines user profile, wardrobe and catalog constraints to rank outfits and give a reason for each.",{ml:3,ai:2,data:1}],
+ ["GetYourFit","Backend and catalog intake","Own the services, APIs, authentication and catalog data intake.",{backend:3,swe:2,data:1}],
+ ["GetYourFit","Docs and sprints","Write the API docs frontend and ML teammates build from, and plan sprints across the team.",{lead:3,swe:1,business:1}],
+ ["GetYourFit","Pitching","National competitions and startup festivals: INR 1.5 lakh in grants and a top-40 finish at IIT Madras E-Summit 2026.",{business:3,lead:2}],
+ ["Bop Consultancy","Go APIs with login and roles","Echo and GORM on MySQL for a client's inventory, order and warehouse app. JWT login, with different access for warehouse and admin users.",{backend:3,swe:2,sql:1}],
+ ["Bop Consultancy","Schema design","Designed the tables for products, orders, order items and invoices.",{sql:3,data:2}],
+ ["thob 3D Studios","Lead lists","Target companies found with Sales Navigator and Apollo.io, tracked in a CRM and prioritised for outreach.",{business:3,research:1}],
+ ["thob 3D Studios","Market and competitor research","Used to decide which companies to approach first.",{research:3,business:2,data:1}]
+];
+const $ = id => document.getElementById(id), list = $("list"), q = $("q");
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const rows = ITEMS.map((it, i) => {
+  const el = document.createElement("div"); el.className = "row";
+  el.innerHTML = `<div class="num serif"></div><div><div class="src">${it[0]}</div><div class="t">${it[1]}</div><p class="d">${it[2]}</p><p class="why"></p></div><div class="fit"><span></span><div class="track"><i></i></div></div>`;
+  return { el, i, tags: it[3], s: 0, why: "" };
+});
+const rx = Object.fromEntries(Object.entries(TAGS).map(([k, v]) => [k, v.kw.map(w => new RegExp("(^|[^a-z])" + w.replace(/[-]/g, "\\-") + "($|[^a-z])"))]));
 
-<h2>Skills</h2>
-<p>
-  <span class="title">Backend:</span> Python, Go, FastAPI, REST APIs, JWT auth, role-based access, background jobs.<br>
-  <span class="title">Data:</span> SQL, PostgreSQL, MySQL, schema design, ingestion pipelines, deduplication.<br>
-  <span class="title">Frontend:</span> Next.js, TypeScript.<br>
-  <span class="title">Tools:</span> Pytest, GitHub Actions, Git, Docker, Render, Vercel, Neon.
-</p>
+function rank(text) {
+  const t = text.toLowerCase(), hit = {};
+  for (const k in rx) { const n = rx[k].filter(r => r.test(t)).length; if (n) hit[k] = Math.min(n, 3); }
+  rows.forEach(r => {
+    r.s = 0; const parts = [];
+    for (const k in hit) if (r.tags[k]) { const v = hit[k] * r.tags[k]; r.s += v; parts.push([k, v]); }
+    parts.sort((a, b) => b[1] - a[1]);
+    r.why = parts.length ? "Matches " + parts.slice(0, 3).map(p => TAGS[p[0]].l).join(", ") : "";
+  });
+  const max = Math.max(...rows.map(r => r.s));
+  const order = [...rows].sort((a, b) => b.s - a.s || a.i - b.i);
+  const first = new Map(rows.filter(r => r.el.isConnected).map(r => [r.el, r.el.getBoundingClientRect().top]));
+  order.forEach((r, n) => {
+    list.appendChild(r.el);
+    r.el.classList.toggle("top", n === 0 && max > 0);
+    r.el.querySelector(".num").textContent = String(n + 1).padStart(2, "0");
+    r.el.querySelector(".why").textContent = r.why;
+    const pct = max ? Math.round(r.s / max * 100) : 0;
+    r.el.querySelector(".fit span").textContent = max ? pct + "% fit" : "";
+    r.el.querySelector(".track i").style.width = pct + "%";
+  });
+  if (!still) rows.forEach(r => {
+    const dy = first.has(r.el) ? first.get(r.el) - r.el.getBoundingClientRect().top : 0;
+    if (dy) r.el.animate([{ transform: `translateY(${dy}px)` }, { transform: "none" }], { duration: 520, easing: "cubic-bezier(.2,.7,.2,1)" });
+  });
+}
+$("roles").innerHTML = Object.keys(ROLES).map(k => `<button data-k="${k}" aria-pressed="false">${ROLES[k][0]}</button>`).join("");
+function pick(k, push) {
+  q.value = ROLES[k][1]; rank(q.value);
+  document.querySelectorAll("#roles button").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === k));
+  if (push) try { history.replaceState(null, "", "#" + k); } catch (e) {}
+}
+$("roles").addEventListener("click", e => { const b = e.target.closest("button"); if (b) pick(b.dataset.k, true); });
+let tm; q.addEventListener("input", () => {
+  clearTimeout(tm); tm = setTimeout(() => {
+    document.querySelectorAll("#roles button").forEach(b => b.setAttribute("aria-pressed", "false")); rank(q.value);
+  }, 160);
+});
+addEventListener("hashchange", () => { const k = location.hash.slice(1); if (ROLES[k]) pick(k); });
+const h0 = location.hash.slice(1);
+rank(""); if (ROLES[h0]) pick(h0);
 
-<footer>Last updated November 2026.</footer>
-
+/* hero: 68 lines merge into one */
+const cv = $("flow"), ctx = cv.getContext("2d"), N = 68;
+const seeds = Array.from({ length: N }, (_, i) => ({ y: (Math.sin(i * 12.9898) * 43758.5453) % 1, i, ph: i * 1.7 }));
+seeds.forEach(s => s.y = 0.06 + Math.abs(s.y) * 0.88);
+let W, H, my = .5, prog = still ? 1 : 0, t0 = performance.now();
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+function size() { const d = devicePixelRatio || 1; W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+function draw(now) {
+  if (!still) prog = Math.min(1, (now - t0) / 2200), prog = 1 - Math.pow(1 - prog, 3);
+  const rgb = dark() ? "236,238,243" : "12,14,19", acc = dark() ? "123,143,255" : "37,64,255";
+  ctx.clearRect(0, 0, W, H);
+  const g = ctx.createLinearGradient(0, 0, W, 0);
+  g.addColorStop(0, `rgba(${rgb},0)`); g.addColorStop(.2, `rgba(${rgb},.13)`); g.addColorStop(.5, `rgba(${rgb},.2)`);
+  g.addColorStop(.62, `rgba(${acc},.85)`); g.addColorStop(1, `rgba(${acc},1)`);
+  ctx.strokeStyle = g; ctx.lineWidth = 1;
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W * prog, H); ctx.clip();
+  const cx = W * .6, cy = H * .56, bend = (my - .5) * 50;
+  for (const s of seeds) {
+    const y0 = s.y * H + (still ? 0 : Math.sin(now / 2600 + s.ph) * 7), o = s.i - N / 2, by = cy + o * .3;
+    ctx.beginPath(); ctx.moveTo(0, y0);
+    ctx.bezierCurveTo(W * .28, y0 + bend, W * .45, by + bend * .3, cx, by);
+    ctx.bezierCurveTo(cx + (W - cx) * .5, by, cx + (W - cx) * .6, cy + o * .03, W, cy + o * .03);
+    ctx.stroke();
+  }
+  ctx.restore();
+  if (!still) requestAnimationFrame(draw);
+}
+size(); addEventListener("resize", () => { size(); if (still) draw(0); });
+document.querySelector(".hero").addEventListener("pointermove", e => { my = e.clientY / innerHeight; });
+requestAnimationFrame(draw);
+</script>
 </body>
 </html>
